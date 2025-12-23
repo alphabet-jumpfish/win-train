@@ -1,0 +1,18 @@
+# 加上对应的版本
+modelscope[framework]==1.32.0
+transformers==4.57.3
+trl==0.26.0
+oss==2.19.1
+yapf==0.32.0
+scikit-learn==1.7.2
+accelerate==1.12.0
+# 模型导出需要使用的包
+onnx==1.19.1
+onnxruntime
+# 模型评测服务
+evalscope[all]
+# huggingface
+langchain_huggingface==1.2.0
+
+#
+langgraph==1.0.5
