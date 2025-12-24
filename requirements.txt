@@ -1,18 +1,28 @@
-# 加上对应的版本
+# FastAPI和Web服务
+fastapi==0.104.1
+uvicorn==0.24.0
+pydantic==2.5.0
+
+# 模型和训练框架
 modelscope[framework]==1.32.0
 transformers==4.57.3
+torch>=2.0.0
 trl==0.26.0
-oss==2.19.1
-yapf==0.32.0
-scikit-learn==1.7.2
+peft>=0.7.0
 accelerate==1.12.0
-# 模型导出需要使用的包
-onnx==1.19.1
-onnxruntime
-# 模型评测服务
-evalscope[all]
-# huggingface
-langchain_huggingface==1.2.0
 
-#
-langgraph==1.0.5
+# 数据处理
+datasets>=2.14.0
+scikit-learn==1.7.2
+pandas>=2.0.0
+tqdm>=4.65.0
+
+# 模型导出
+onnx==1.19.1
+onnxruntime>=1.16.0
+
+# 模型评测
+evalscope[all]
+
+# 其他工具
+pyyaml>=6.0

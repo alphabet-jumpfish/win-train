@@ -4,9 +4,12 @@ __pycache__/
 *$py.class
 
 # 去掉模型
-model/
-# 去掉数据层
+model
 dataset/
+output/
+# 去掉数据层
+
+nul
 
 # --- C 扩展 ---
 *.so
