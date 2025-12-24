@@ -15,7 +15,8 @@ async def evaluate_model(request: EvalRequest):
             model_path=request.model_path,
             dataset_path=request.dataset_path,
             metrics=request.metrics,
-            batch_size=request.batch_size
+            batch_size=request.batch_size,
+            lora_adapter_path=request.lora_adapter_path
         )
 
         eval_result = EvalResult(

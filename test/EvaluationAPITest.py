@@ -3,9 +3,12 @@ import json
 import os
 import sys
 
+from util.WinConstant import Constant
+
 # 设置UTF-8编码，避免Windows控制台编码问题
 if sys.platform == 'win32' and hasattr(sys.stdout, 'buffer'):
     import io
+
     if not isinstance(sys.stdout, io.TextIOWrapper) or sys.stdout.encoding != 'utf-8':
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
         sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
@@ -24,9 +27,18 @@ class EvaluationAPITest:
         print("测试模型评估API")
         print("=" * 50)
 
+        with open(Constant.CONFIG_PATH, 'r', encoding='utf-8') as f:
+            config = yaml.safe_load(f)
+            print(f"配置文件加载成功: {Constant.CONFIG_PATH}")
+
+        # 初始化推理服务（可选）
+        if config.get('inference', {}).get('auto_load', False):
+            lora_path = config['model'].get('lora_output_path')
+
         # 准备请求数据
         test_data_path = os.path.join(self.test_data_dir, "train_sample.json")
         request_data = {
+            "lora_adapter_path": config['model'].get('lora_output_path'),
             "model_path": model_path,
             "dataset_path": test_data_path,
             "metrics": ["loss", "perplexity"],
@@ -83,6 +95,7 @@ class EvaluationAPITest:
 
 if __name__ == "__main__":
     import yaml
+
     config_path = os.path.join(os.path.dirname(__file__), "..", "config.yaml")
     try:
         with open(config_path, 'r', encoding='utf-8') as f:

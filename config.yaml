@@ -3,93 +3,13 @@ model:
   # 基础模型路径
   base_model_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/model/qwen3-0.6'
   # 模型保存路径
-  save_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/system_model'
-  # 训练检查点保存路径
-  checkpoint_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/checkpoints'
+  save_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/model'
   # LoRA适配器保存路径
-  lora_output_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/lora-output'
-
-# 数据集配置
-dataset:
-  # 原始数据路径
-  raw_data_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/data/raw'
-  # 处理后数据路径
-  processed_data_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/data/processed'
-  # 训练数据集路径
-  train_dataset_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/data/train.json'
-  # 验证数据集路径
-  val_dataset_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/data/val.json'
-  # 测试数据集路径
-  test_dataset_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/data/test.json'
-
-# 训练配置
-training:
-  # 训练方式: trl 或 lora
-  strategy: 'trl'
-  # 每个设备的batch size
-  per_device_train_batch_size: 2
-  # 梯度累积步数
-  gradient_accumulation_steps: 4
-  # 学习率
-  learning_rate: 2e-4
-  # 训练步数
-  max_steps: 1000
-  # 训练轮数
-  num_train_epochs: 5
-  # 预热步数
-  warmup_steps: 10
-  # 日志记录步数
-  logging_steps: 20
-  # 优化器
-  optim: 'adamw_torch'
-  # 权重衰减
-  weight_decay: 0.01
-  # 学习率调度器
-  lr_scheduler_type: 'linear'
-  # 随机种子
-  seed: 929
-  # 最大序列长度
-  max_length: 512
-
-# LoRA配置
-lora:
-  # LoRA秩
-  r: 8
-  # LoRA缩放因子
-  lora_alpha: 32
-  # 目标模块
-  target_modules: ['q_proj', 'k_proj', 'v_proj', 'o_proj']
-  # Dropout概率
-  lora_dropout: 0.05
-  # 偏置
-  bias: 'none'
+  lora_output_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/output/lora_output'
 
 # 推理配置
 inference:
-  # 最大生成token数
-  max_new_tokens: 512
-  # 温度
-  temperature: 0.7
-  # top_p采样
-  top_p: 0.8
-  # top_k采样
-  top_k: 20
-  # 是否启用thinking模式
-  enable_thinking: false
-
-# 导出配置
-export:
-  # ONNX导出路径
-  onnx_output_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/export/onnx'
-  # 其他格式导出路径
-  other_output_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/export/other'
-
-# 评估配置
-evaluation:
-  # 评估结果保存路径
-  result_path: 'D:/namespace/tensorflow-project-namespace/Win-Train/eval_results'
-  # 评估指标
-  metrics: ['accuracy', 'loss', 'perplexity']
+  auto_load: true
 
 # API服务配置
 api:

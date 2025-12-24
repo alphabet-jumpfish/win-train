@@ -44,8 +44,8 @@ async def startup_event():
 
         # 初始化推理服务（可选）
         if config.get('inference', {}).get('auto_load', False):
-            model_path = config['system_model']['base_model_path']
-            lora_path = config['system_model'].get('lora_output_path')
+            model_path = config['model']['base_model_path']
+            lora_path = config['model'].get('lora_output_path')
             InferenceController.init_inference_service(model_path, lora_path)
             print(f"推理服务已初始化: {model_path}")
 

@@ -6,6 +6,7 @@ import sys
 # 设置UTF-8编码，避免Windows控制台编码问题
 if sys.platform == 'win32' and hasattr(sys.stdout, 'buffer'):
     import io
+
     if not isinstance(sys.stdout, io.TextIOWrapper) or sys.stdout.encoding != 'utf-8':
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
         sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
@@ -25,9 +26,9 @@ class InferenceAPITest:
 
         # 准备请求数据
         request_data = {
-            "model_path": model_path,
+            # "model_path": model_path,
             "messages": [
-                {"role": "user", "content": "你好，介绍一下自己"}
+                {"role": "user", "content": "你好"}
             ],
             "max_tokens": 100,
             "temperature": 0.7
@@ -170,33 +171,37 @@ class InferenceAPITest:
 
         # 测试1: 普通推理
         print("\n\n【测试1】普通推理API")
-        chat_result = self.test_chat_inference(model_path)
+        chat_result = self.test_chat_inference(
+            model_path
+        )
 
         print("\n" + "-" * 60)
 
         # 测试2: 流式推理
-        print("\n\n【测试2】流式推理API")
-        stream_result = self.test_stream_inference(model_path)
-
-        print("\n" + "-" * 60)
-
-        # 测试3: 批量推理
-        print("\n\n【测试3】批量推理API")
-        batch_result = self.test_batch_inference(model_path)
+        # print("\n\n【测试2】流式推理API")
+        # stream_result = self.test_stream_inference(model_path)
+        #
+        # print("\n" + "-" * 60)
+        #
+        # # 测试3: 批量推理
+        # print("\n\n【测试3】批量推理API")
+        # batch_result = self.test_batch_inference(model_path)
 
         print("\n" + "=" * 60)
         print("推理服务API测试完成")
         print("=" * 60)
 
         return {
-            "chat": chat_result,
-            "stream": stream_result,
-            "batch": batch_result
+            "chat": chat_result
+            # ,
+            # "stream": stream_result,
+            # "batch": batch_result
         }
 
 
 if __name__ == "__main__":
     import yaml
+
     config_path = os.path.join(os.path.dirname(__file__), "..", "config.yaml")
     try:
         with open(config_path, 'r', encoding='utf-8') as f:

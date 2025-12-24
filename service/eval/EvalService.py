@@ -1,4 +1,6 @@
-from typing import Dict, Any, List
+from typing import Dict, Any, List, Optional
+
+from peft import PeftModel
 from transformers import AutoTokenizer, AutoModelForCausalLM
 from datasets import load_dataset
 import torch
@@ -13,7 +15,8 @@ class EvalService:
     def __init__(self):
         pass
 
-    def evaluate_model(self, model_path: str, dataset_path: str, metrics: List[str], batch_size: int = 8) -> Dict[str, Any]:
+    def evaluate_model(self, model_path: str, dataset_path: str, metrics: List[str], batch_size: int = 8,
+                       lora_adapter_path: Optional[str] = None) -> Dict[str, Any]:
         """
         评估模型性能
         Args:
@@ -35,6 +38,10 @@ class EvalService:
                 device_map="auto",
                 dtype=torch.bfloat16
             )
+            # 如果提供了LoRA适配器路径，加载适配器
+            if lora_adapter_path:
+                print(f"加载LoRA适配器: {lora_adapter_path}")
+                model = PeftModel.from_pretrained(self.model, lora_adapter_path)
 
             # 加载数据集
             dataset = load_dataset("json", data_files=dataset_path, split="train")
@@ -68,7 +75,7 @@ class EvalService:
         model.eval()
         with torch.no_grad():
             for i in range(0, len(dataset), batch_size):
-                batch = dataset[i:i+batch_size]
+                batch = dataset[i:i + batch_size]
 
                 # 处理批次中的每个样本
                 for j in range(len(batch['conversations']) if 'conversations' in batch else 0):

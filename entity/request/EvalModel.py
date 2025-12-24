@@ -8,7 +8,7 @@ class EvalRequest(BaseModel):
     dataset_path: str = Field(..., description="数据集路径")
     metrics: List[str] = Field(default=['accuracy', 'loss'], description="评估指标")
     batch_size: int = Field(default=8, description="批次大小")
-
+    lora_adapter_path: str = Field(..., description="lora地址")
 
 class EvalResult(BaseModel):
     """评估结果模型"""
