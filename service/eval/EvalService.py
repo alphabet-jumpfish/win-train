@@ -41,7 +41,7 @@ class EvalService:
             # 如果提供了LoRA适配器路径，加载适配器
             if lora_adapter_path:
                 print(f"加载LoRA适配器: {lora_adapter_path}")
-                model = PeftModel.from_pretrained(self.model, lora_adapter_path)
+                model = PeftModel.from_pretrained(model, lora_adapter_path)
 
             # 加载数据集
             dataset = load_dataset("json", data_files=dataset_path, split="train")

@@ -38,7 +38,7 @@ class EvaluationAPITest:
         # 准备请求数据
         test_data_path = os.path.join(self.test_data_dir, "train_sample.json")
         request_data = {
-            "lora_adapter_path": config['model'].get('lora_output_path'),
+            #"lora_adapter_path": config['model'].get('lora_output_path'),
             "model_path": model_path,
             "dataset_path": test_data_path,
             "metrics": ["loss", "perplexity"],
