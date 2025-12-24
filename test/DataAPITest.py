@@ -6,6 +6,7 @@ import sys
 # 设置UTF-8编码，避免Windows控制台编码问题
 if sys.platform == 'win32' and hasattr(sys.stdout, 'buffer'):
     import io
+
     if not isinstance(sys.stdout, io.TextIOWrapper) or sys.stdout.encoding != 'utf-8':
         sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding='utf-8')
         sys.stderr = io.TextIOWrapper(sys.stderr.buffer, encoding='utf-8')
@@ -17,7 +18,7 @@ class DataAPITest:
     def __init__(self, base_url: str = "http://127.0.0.1:8801"):
         self.base_url = base_url
         self.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
-        self.test_output_dir = os.path.join(os.path.dirname(__file__), "output")
+        self.test_output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "output")
 
         # 确保输出目录存在
         os.makedirs(self.test_output_dir, exist_ok=True)

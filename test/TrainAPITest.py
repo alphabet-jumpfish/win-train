@@ -19,11 +19,8 @@ class TrainAPITest:
     def __init__(self, base_url: str = "http://127.0.0.1:8801"):
         self.base_url = base_url
         self.test_data_dir = os.path.join(os.path.dirname(__file__), "data")
-        self.test_output_dir = os.path.join(os.path.dirname(__file__), "output")
-
-        # 确保输出目录存在
+        self.test_output_dir = os.path.join(os.path.dirname(os.path.dirname(__file__)), "output")
         os.makedirs(self.test_output_dir, exist_ok=True)
-
         # 测试数据路径
         self.train_data_path = os.path.join(self.test_data_dir, "train_sample.json")
 
